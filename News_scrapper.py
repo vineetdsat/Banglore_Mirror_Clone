@@ -14,9 +14,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
 client = gspread.authorize(creds)
 
 sheet = client.open("News").sheet1
-sheet.delete_rows(2, 200)
-sheet.delete_rows(2, 200)
-sheet.delete_rows(2, 200)
+sheet.delete_rows(2,200)
 
 
 
@@ -37,13 +35,25 @@ while page != 0:
         img = link.img.get('data-src')
         img_url = 'https://bangaloremirror.indiatimes.com' + img
         Link = 'https://bangaloremirror.indiatimes.com' + link['href']
-        view_more = '\n                        View More\n                        '
+        url = Link
+        code = requests.get(url)
+        soup = BeautifulSoup(code.text, 'lxml')
+        news = soup.find('div', {'class': 'Normal'})
 
+        extra1 = news.script
+        extra1.decompose()
+        extra2 = news.script
+        extra2.decompose()
+        extra3 = news.script
+        extra3.decompose()
+
+        news_discription = news.text
+
+        view_more = '\n                        View More\n                        '
         if Headline == 'Next' or Headline == 'Prev' or Headline == view_more:
             continue
 
-        insertRow = [Headline, Link, img_url]
+        insertRow = [Headline, Link, img_url, news_discription]
         sheet.insert_row(insertRow, ab)
         ab = ab + 1
-
     page = page + 1
