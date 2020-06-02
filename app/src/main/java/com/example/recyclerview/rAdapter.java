@@ -1,7 +1,6 @@
 package com.example.recyclerview;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +45,8 @@ public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
             Picasso.get().load(news_lst.get(position).getImg_URL()).into(holder.Img_Url);
 
 
+
+
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
@@ -79,7 +80,7 @@ public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(v.getContext(), Description.class);
-                    i.putExtra("des", (Parcelable) news_lst.get(getAdapterPosition()));
+                    i.putExtra("des", news_lst.get(getAdapterPosition()));
                     v.getContext().startActivity(i);
                 }
             });
