@@ -17,7 +17,11 @@ public class Description extends AppCompatActivity {
 
         descrip = findViewById(R.id.tv_des);
         Intent i = getIntent();
-        String des = i.getStringExtra("des");
+        Updates updates = i.getParcelableExtra("des");
+
+        String des = updates.getDescription();
+
+
         descrip.setText(des);
     }
 }
