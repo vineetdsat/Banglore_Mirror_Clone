@@ -1,7 +1,7 @@
 package com.example.recyclerview;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.os.Parcelable;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -21,7 +20,7 @@ public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
 
     private List<Updates> news_lst;
 
-    public rAdapter(List<Updates> news_lst) {
+    rAdapter( List<Updates> news_lst) {
         this.news_lst = news_lst;
     }
 
@@ -40,9 +39,10 @@ public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
     public void onBindViewHolder(@NonNull rViewHolder holder, int position) {
         try {
             Updates updates = news_lst.get(position);
-
             holder.Headline.setText(updates.getHead());
             holder.Link.setText(updates.getLink());
+            holder.des.setText(updates.getDescription());
+
             Picasso.get().load(news_lst.get(position).getImg_URL()).into(holder.Img_Url);
 
 
@@ -62,10 +62,9 @@ public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
         return news_lst.size();
     }
 
-    public static class rViewHolder extends RecyclerView.ViewHolder{
-        TextView Headline, Link;
+    public class rViewHolder extends RecyclerView.ViewHolder{
+        TextView Headline, Link, des;
         ImageView Img_Url;
-        CardView View1;
 
         public rViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,22 +72,17 @@ public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
             Headline = itemView.findViewById(R.id.tv_1);
             Link = itemView.findViewById(R.id.tv_2);
             Img_Url = itemView.findViewById(R.id.coverImage);
+            des = itemView.findViewById(R.id.tv_3);
 
-            View1 = itemView.findViewById(R.id.cv_lst);
 
-
-            View1.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   String url_open = Link.getText().toString();
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(url_open));
-                    v.getContext().startActivity(intent);
+                    Intent i = new Intent(v.getContext(), Description.class);
+                    i.putExtra("des", (Parcelable) news_lst.get(getAdapterPosition()));
+                    v.getContext().startActivity(i);
                 }
             });
-
-
-
 
 
         }

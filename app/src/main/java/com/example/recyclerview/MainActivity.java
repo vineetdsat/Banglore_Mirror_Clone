@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     updates.setHead(news.getString("headlines"));
                     updates.setLink(news.getString("links"));
                     updates.setImg_URL(news.getString("img_url"));
+                    updates.setDescription(news.getString("description"));
                     news_lst.add(updates);
                 }
 
