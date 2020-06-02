@@ -1,6 +1,9 @@
 package com.example.recyclerview;
 
-public class Updates{
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Updates implements Parcelable {
     private String Head;
     private String Link;
     private String Img_URL;
@@ -16,6 +19,25 @@ public class Updates{
         Img_URL = Img_url;
         description = Description;
     }
+
+    protected Updates(Parcel in) {
+        Head = in.readString();
+        Link = in.readString();
+        Img_URL = in.readString();
+        description = in.readString();
+    }
+
+    public static final Creator<Updates> CREATOR = new Creator<Updates>() {
+        @Override
+        public Updates createFromParcel(Parcel in) {
+            return new Updates(in);
+        }
+
+        @Override
+        public Updates[] newArray(int size) {
+            return new Updates[size];
+        }
+    };
 
     public String getImg_URL() {
         return Img_URL;
@@ -47,5 +69,18 @@ public class Updates{
 
     public void setLink(String link) {
         Link = link;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Head);
+        dest.writeString(Link);
+        dest.writeString(Img_URL);
+        dest.writeString(description);
     }
 }
