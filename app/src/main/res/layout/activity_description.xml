@@ -3,19 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorAccent"
+    android:background="#ffffff"
     android:layout_height="match_parent"
     tools:context=".Description">
+
     <TextView
+        android:id="@+id/desc_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/description"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="45sp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="15dp"
+        android:hint="@string/headline"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_marginBottom="15dp"/>
+        android:textSize="25sp"
+        android:textStyle="bold|italic" />
 
    <ScrollView
        android:layout_width="wrap_content"

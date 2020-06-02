@@ -21,7 +21,7 @@ public class Updates implements Parcelable {
     }
 
     protected Updates(Parcel in) {
-
+        Head = in.readString();
         description = in.readString();
     }
 
@@ -76,7 +76,7 @@ public class Updates implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-     
+        dest.writeString(Head);
         dest.writeString(description);
     }
 }
