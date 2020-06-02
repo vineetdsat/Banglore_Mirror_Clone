@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
     List<Updates> news_lst;
     RecyclerView recyclerView;
     Snackbar snackbar;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        progressBar = findViewById(R.id.pg_bar);
         news_lst = new ArrayList<>();
         recyclerView = findViewById(R.id.rv_layout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -115,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
 
                 rAdapter adapter = new rAdapter(news_lst);
                 recyclerView.setAdapter(adapter);
+                progressBar.setVisibility(View.GONE);
+
 
             }catch (Exception e){
                 e.printStackTrace();

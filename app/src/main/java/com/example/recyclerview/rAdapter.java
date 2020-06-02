@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,6 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
-
     private List<Updates> news_lst;
 
     rAdapter( List<Updates> news_lst) {
@@ -28,7 +28,6 @@ public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
     @Override
     public rViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
         View layoutModel = inflater.inflate(R.layout.list_item, parent, false);
         rViewHolder recycleViewHolder = new rViewHolder(layoutModel);
         return recycleViewHolder;
@@ -41,7 +40,6 @@ public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
             holder.Headline.setText(updates.getHead());
             holder.Link.setText(updates.getLink());
             holder.des.setText(updates.getDescription());
-
             Picasso.get().load(news_lst.get(position).getImg_URL()).into(holder.Img_Url);
 
 
@@ -56,6 +54,7 @@ public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
         }
 
 
+
     }
 
     @Override
@@ -67,6 +66,7 @@ public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
         TextView Headline, Link, des;
         ImageView Img_Url;
 
+
         public rViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -74,6 +74,8 @@ public class rAdapter extends RecyclerView.Adapter<rAdapter.rViewHolder> {
             Link = itemView.findViewById(R.id.tv_2);
             Img_Url = itemView.findViewById(R.id.coverImage);
             des = itemView.findViewById(R.id.tv_3);
+
+
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
